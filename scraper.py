@@ -1,24 +1,36 @@
-# This is a template for a Python scraper on morph.io (https://morph.io)
-# including some code snippets below that you should find helpful
+import os
+import csv
+from bs4 import BeautifulSoup
+from requests_html import HTMLSession
+from fake_useragent import UserAgent
 
-# import scraperwiki
-# import lxml.html
-#
-# # Read in a page
-# html = scraperwiki.scrape("http://foo.com")
-#
-# # Find something on the page using css selectors
-# root = lxml.html.fromstring(html)
-# root.cssselect("div[align='left']")
-#
-# # Write out to the sqlite database using scraperwiki library
-# scraperwiki.sqlite.save(unique_keys=['name'], data={"name": "susan", "occupation": "software developer"})
-#
-# # An arbitrary query against the database
-# scraperwiki.sql.select("* from data where 'name'='peter'")
+ua = UserAgent()
+url = os.environ['MORPH_HOST']
+selector = os.environ['MORPH_SELECTOR']
+session = HTMLSession()
+session.headers = ua.random 
 
-# You don't have to do things with the ScraperWiki and lxml libraries.
-# You can use whatever libraries you want: https://morph.io/documentation/python
-# All that matters is that your final data is written to an SQLite database
-# called "data.sqlite" in the current working directory which has at least a table
-# called "data".
+r.html.render()
+
+vip_companies = r.html.select(selector)
+
+
+for row in vip_companies:
+    company = row.find('a span').text
+    for pos in row.select('ul li'):
+        print('has position ',pos.text)
+    print('\n')
+
+
+
+
+#with requests.Session() as s:
+#    download = s.get(CSV_URL,ua)
+#
+#    decoded_content = download.content.decode('utf-8')
+#
+#    cr = csv.reader(decoded_content.splitlines(), delimiter=',')
+#    my_list = list(cr)
+#    for row in my_list:
+#        print(row)
+
